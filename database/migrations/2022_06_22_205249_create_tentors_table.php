@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-
+        Schema::create('tentors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('username')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('mapel')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('photo')->nullable();
             $table->tinyInteger('level');
-            /* Users: 0=>Siswa, 1=>Tentor, 2=>Admin */
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tentors');
     }
 };
