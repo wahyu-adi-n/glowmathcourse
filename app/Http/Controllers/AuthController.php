@@ -58,7 +58,6 @@ class AuthController extends Controller
     public function loginProcess(Request $request)
     {
         $input = $request->all();
-
         $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required|min:8',
@@ -73,7 +72,6 @@ class AuthController extends Controller
             }else if (Auth::user()->level== UserLevel::siswa->name){
                 return redirect()->route('siswa.dashboard')->with('success', 'Login kamu berhasil!');
             } else {
-                @dd(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])));
                 return back()->with('fail','Email dan Password kamu salah!');
             }
         }
@@ -110,6 +108,9 @@ class AuthController extends Controller
             User::create($data);
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
         } else if ($request->level == UserLevel::admin->value) {
+            $kode = 'ADMIN-'.Str::random(3);
+            $data['kode'] = $kode;
+            User::create($data);
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
         } else {
             return back()->with('fail','Pendaftaran kamu gagal!');
