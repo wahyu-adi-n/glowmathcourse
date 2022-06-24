@@ -24,7 +24,9 @@ class DashboardController extends Controller
      */
     public function siswaDashboard()
     {
-        return view('siswa.dashboard');
+        return view('siswa.dashboard', [
+            'title' => 'Siswa Dashboard | Glowmath Course'
+        ]);
     }
 
     /**
@@ -34,7 +36,9 @@ class DashboardController extends Controller
      */
     public function adminDashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', [
+            'title' => 'Admin Dashboard | Glowmath Course '
+        ]);
     }
 
     /**
@@ -44,6 +48,8 @@ class DashboardController extends Controller
      */
     public function tentorDashboard()
     {
-        return view('tentor.dashboard');
+        return view('tentor.dashboard', [
+            'title' => 'Tentor Dashboard | Glowmath Course'
+        ]);
     }
 }

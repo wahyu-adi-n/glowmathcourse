@@ -1,1 +1,4 @@
-INI SISWA YA
+@extends('layouts.main')
+@section('content')
+  INI SISWA YA
+@endsection
