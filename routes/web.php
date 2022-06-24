@@ -32,7 +32,7 @@ Route::middleware(['auth', 'user-access:siswa'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-access:tentor'])->group(function () {
-    Route::get('/tentor/dashboard', [DashboardController::class, 'tentorDashboard'])->name('tentor.home');
+    Route::get('/tentor/dashboard', [DashboardController::class, 'tentorDashboard'])->name('tentor.dashboard');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

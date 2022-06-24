@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('tentors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique()->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('kode_tentor')->unique();
+            // $table->string('name');
+            // $table->string('username')->unique()->nullable();
+            // $table->string('email')->unique();
+            // $table->string('password');
+            // $table->tinyInteger('level');
             $table->string('mapel')->nullable();
             $table->text('alamat')->nullable();
             $table->string('nohp')->nullable();
             $table->string('photo')->nullable();
-            $table->tinyInteger('level');
+            //same
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

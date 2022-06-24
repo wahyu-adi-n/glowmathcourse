@@ -14,9 +14,7 @@ class Siswa extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'level'
+        'kode_siswa', 'kelas', 'alamat', 'nohp',
+        'nohp_ortu', 'asal_sekolah', 'photo'
     ];
 }

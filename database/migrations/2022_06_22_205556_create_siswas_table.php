@@ -15,17 +15,19 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique()->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('kode_siswa')->unique();
+            // $table->string('name');
+            // $table->string('username')->unique()->nullable();
+            // $table->string('email')->unique();
+            // $table->string('password');
+            // $table->tinyInteger('level');
             $table->string('kelas')->nullable();
             $table->text('alamat')->nullable();
             $table->string('nohp')->nullable();
             $table->string('nohp_ortu')->nullable();
             $table->string('asal_sekolah')->nullable();
             $table->string('photo')->nullable();
-            $table->tinyInteger('level');
+            //same
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -1,10 +1,10 @@
 <?php
 
-namespace Enums;
+namespace App\Enums;
 
 enum UserLevel:string
 {
-    case Admin = 'admin';
-    case Tentor = 'tentor';
-    case Siswa = 'siswa';
+    case admin = "2";
+    case tentor = "1";
+    case siswa = "0";
 }

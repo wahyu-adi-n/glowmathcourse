@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Enums\UserLevel;
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Tentor;
+use App\Enums\UserLevel;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -57,23 +59,25 @@ class AuthController extends Controller
     {
         $input = $request->all();
 
-        $this->validate($request, [
+        $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required',
+            'password' => 'required|min:8',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        if(Auth::attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            if (auth()->user()->level == UserLevel::Admin) {
+            if (Auth::user()->level == UserLevel::admin->name) {
                 return redirect()->route('admin.dashboard')->with('success', 'Login kamu berhasil!');
-            }else if (auth()->user()->level == UserLevel::Tentor) {
+            }else if (Auth::user()->level == UserLevel::tentor->name) {
                 return redirect()->route('tentor.dashboard')->with('success', 'Login kamu berhasil!');
-            }else if (auth()->user()->level == UserLevel::Siswa){
+            }else if (Auth::user()->level== UserLevel::siswa->name){
                 return redirect()->route('siswa.dashboard')->with('success', 'Login kamu berhasil!');
             } else {
+                @dd(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])));
                 return back()->with('fail','Email dan Password kamu salah!');
             }
-        }else{
+        }
+        else{
             return back()->with('fail','Email dan Password kamu salah!');
         }
     }
@@ -82,20 +86,30 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255|string',
-            'email' => 'required|email:dns|unique:users|unique:tentors|unique:siswas',
+            'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:8'
         ]);
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'level' => $request->level,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'level' => $request->level
         ];
 
-        if (Tentor::create($data)) {
+        if ($request->level == UserLevel::tentor->value){
+            $kode = 'TENTOR-'.Str::random(3);
+            Tentor::create(['kode_tentor' => $kode]);
+            $data['kode'] = $kode;
+            User::create($data);
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
-        } else if(Siswa::create($data)) {
+        } else if ($request->level == UserLevel::siswa->value){
+            $kode = 'SISWA-'.Str::random(3);
+            Siswa::create(['kode_siswa' => $kode]);
+            $data['kode'] = $kode;
+            User::create($data);
+            return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
+        } else if ($request->level == UserLevel::admin->value) {
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
         } else {
             return back()->with('fail','Pendaftaran kamu gagal!');

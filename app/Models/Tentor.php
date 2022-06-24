@@ -14,9 +14,6 @@ class Tentor extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'level'
+        'kode_tentor','mapel', 'alamat','nohp', 'photo'
     ];
 }
