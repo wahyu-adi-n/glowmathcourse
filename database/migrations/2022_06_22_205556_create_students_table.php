@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('siswas', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('kode_siswa')->unique();
             // $table->string('name');
@@ -22,12 +22,12 @@ return new class extends Migration
             // $table->string('password');
             // $table->tinyInteger('level');
             $table->string('kelas')->nullable();
+            $table->string('tingkat')->nullable();
             $table->text('alamat')->nullable();
             $table->string('nohp')->nullable();
             $table->string('nohp_ortu')->nullable();
             $table->string('asal_sekolah')->nullable();
             $table->string('photo')->nullable();
-            //same
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siswas');
+        Schema::dropIfExists('students');
     }
 };

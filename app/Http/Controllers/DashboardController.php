@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
+use App\Models\Tentor;
+use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +29,8 @@ class DashboardController extends Controller
     public function siswaDashboard()
     {
         return view('siswa.dashboard', [
-            'title' => 'Siswa Dashboard | Glowmath Course'
+            'title' => 'Dashboard Siswa',
+            'subtitle' => 'Dashboard'
         ]);
     }
 
@@ -37,7 +42,12 @@ class DashboardController extends Controller
     public function adminDashboard()
     {
         return view('admin.dashboard', [
-            'title' => 'Admin Dashboard | Glowmath Course '
+            'title' => 'Dashboard Admin',
+            'subtitle' => 'Dashboard',
+            // 'students_count' => Student::all()->count(),
+            // 'tentors_count' => Tentor::all()->count(),
+            // 'subjects_count' => Subject::all()->count(),
+            // 'levels_count' => Level::all()->count()
         ]);
     }
 
@@ -49,7 +59,8 @@ class DashboardController extends Controller
     public function tentorDashboard()
     {
         return view('tentor.dashboard', [
-            'title' => 'Tentor Dashboard | Glowmath Course'
+            'title' => 'Dashboard Tentor',
+            'subtitle' => 'Dashboard'
         ]);
     }
 }

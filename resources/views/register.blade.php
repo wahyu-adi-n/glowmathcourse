@@ -21,24 +21,35 @@
 <body class="hold-transition register-page">
   <div class="register-box">
     <div class="card card-outline card-primary">
+      @if (session()->has('fail'))
+        <div class="fail" data-flashdata="{{ session('fail') }}"></div>
+      @endif
+      @if (session()->has('success'))
+        <div class="success" data-flashdata="{{ session('success') }}"></div>
+      @endif
       <div class="card-header text-center">
         <a href="/register" class="h3"><b>{{ $title }}</b></a>
       </div>
       <div class="card-body">
+        <div class="fail" data-flashdata=""></div>
         <form action="/register" method="post">
           @csrf
           <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control @error('name') invalid-feedback @enderror"
-              placeholder="Masukkan Nama" autofocus required value="{{ old('name') }}">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+              placeholder="Masukkan Nama" autofocus value="{{ old('name') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
+            {{-- @error('name')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="input-group mb-3">
-            <select name="level" class="form-control @error('level') invalid-feedback @enderror" required
-              placeholder="Pilih Level">
+            <select name="level" class="form-control @error('level') is-invalid @enderror" placeholder="Pilih Level">
               <option value="">Pilih Level</option>
               <option value="0">Siswa</option>
               <option value="1">Tentor</option>
@@ -49,24 +60,39 @@
                 <span class="fas fa-users"></span>
               </div>
             </div>
+            {{-- @error('level')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') invalid-feedback @enderror"
-              placeholder="Masukkan Email" required value="{{ old('email') }}">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+              placeholder="Masukkan Email" value="{{ old('email') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
+            {{-- @error('email')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') invalid-feedback @enderror"
-              placeholder="Masukkan Password" required>
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+              placeholder="Masukkan Password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            {{-- @error('password')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="row">
             <div class="col-lg-12">
@@ -90,6 +116,48 @@
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.min.js"></script>
+  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script>
+    const fail = $('.fail').data('flashdata');
+    const success = $('.success').data('flashdata');
+
+    if (fail) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: fail
+      });
+    }
+
+    if (success) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: success
+      });
+    }
+  </script>
 
 </body>
 

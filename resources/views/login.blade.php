@@ -21,6 +21,12 @@
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
+      @if (session()->has('fail'))
+        <div class="fail" data-flashdata="{{ session('fail') }}"></div>
+      @endif
+      @if (session()->has('success'))
+        <div class="success" data-flashdata="{{ session('success') }}"></div>
+      @endif
       <div class="card-header text-center">
         <a href="/login" class="h3"><b>{{ $title }}</b></a>
       </div>
@@ -28,22 +34,32 @@
         <form action="/login" method="post">
           @csrf
           <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') invalid-feedback @enderror"
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
               placeholder="Masukkan Email" autofocus required value="{{ old('email') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
+            {{-- @error('email')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('email') invalid-feedback @enderror"
+            <input type="password" name="password" class="form-control @error('email') is-invalid @enderror"
               placeholder="Masukkan Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            {{-- @error('password')
+              <div class="error invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror --}}
           </div>
           <div class="row">
             <div class="col-lg-12">
@@ -70,6 +86,48 @@
   <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.min.js"></script>
+  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script>
+    const fail = $('.fail').data('flashdata');
+    const success = $('.success').data('flashdata');
+
+    if (fail) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: fail
+      });
+    }
+
+    if (success) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: success
+      });
+    }
+  </script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Siswa;
+use App\Models\Student;
 use App\Models\Tentor;
 use App\Enums\UserLevel;
 use Illuminate\Support\Str;
@@ -45,45 +45,45 @@ class AuthController extends Controller
 
     public function login(){
         return view('login',[
-            'title' => 'Glowmathcourse'
+            'title' => 'Login'
         ]);
     }
 
     public function register(){
         return view('register',[
-            'title' => 'Glowmathcourse'
+            'title' => 'Register'
         ]);
     }
 
     public function loginProcess(Request $request)
     {
-        $input = $request->all();
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required|min:8',
         ]);
 
-        if(Auth::attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        if(Auth::attempt($credentials))
         {
-            if (Auth::user()->level == UserLevel::admin->name) {
+            $request->session()->regenerate();
+            if ($request->user()->level == UserLevel::admin->name) {
                 return redirect()->route('admin.dashboard')->with('success', 'Login kamu berhasil!');
-            }else if (Auth::user()->level == UserLevel::tentor->name) {
+            }else if ($request->user()->level == UserLevel::tentor->name) {
                 return redirect()->route('tentor.dashboard')->with('success', 'Login kamu berhasil!');
-            }else if (Auth::user()->level== UserLevel::siswa->name){
+            }else if ($request->user()->level == UserLevel::siswa->name){
                 return redirect()->route('siswa.dashboard')->with('success', 'Login kamu berhasil!');
             } else {
-                return back()->with('fail','Email dan Password kamu salah!');
+                return back()->with('fail','Email dan password kamu salah!');
             }
         }
         else{
-            return back()->with('fail','Email dan Password kamu salah!');
+            return back()->with('fail','Email dan password kamu salah!');
         }
     }
 
     public function registerProcess(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255|string',
+            'name' => 'required|string|max:255',
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:8'
         ]);
@@ -103,7 +103,7 @@ class AuthController extends Controller
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');
         } else if ($request->level == UserLevel::siswa->value){
             $kode = 'SISWA-'.Str::random(3);
-            Siswa::create(['kode_siswa' => $kode]);
+            Student::create(['kode_siswa' => $kode]);
             $data['kode'] = $kode;
             User::create($data);
             return redirect()->route('login')->with('success','Pendaftaran kamu berhasil!');

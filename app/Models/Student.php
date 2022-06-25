@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Model
+class Student extends Model
 {
     use HasFactory;
     /**
@@ -14,7 +14,7 @@ class Siswa extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'kode_siswa', 'kelas', 'alamat', 'nohp',
+        'kode_siswa', 'kelas', 'tingkat', 'alamat', 'nohp',
         'nohp_ortu', 'asal_sekolah', 'photo'
     ];
 }
