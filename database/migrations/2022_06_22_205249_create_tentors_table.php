@@ -21,7 +21,7 @@ return new class extends Migration
             // $table->string('email')->unique();
             // $table->string('password');
             // $table->tinyInteger('level');
-            $table->string('mapel')->nullable();
+            $table->string('kode_mapel')->nullable();
             $table->text('alamat')->nullable();
             $table->string('nohp')->nullable();
             $table->string('photo')->nullable();

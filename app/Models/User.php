@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tentor;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -51,5 +52,12 @@ class User extends Authenticatable
         return new Attribute(
             get: fn ($value) =>  ["siswa", "tentor", "admin"][$value],
         );
+    }
+
+    protected $with = ['tentor'];
+
+    public function tentor()
+    {
+        return  $this->hasOne(Tentor::class, 'kode_tentor');
     }
 }

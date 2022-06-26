@@ -2,12 +2,12 @@
 @section('start')
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1 class="m-0">Dashboard</h1>
+      <h1 class="m-0">{{ $title }}</h1>
     </div><!-- /.col -->
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard v1</li>
+        <li class="breadcrumb-item active">{{ $title }}</li>
       </ol>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -19,9 +19,8 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>150</h3>
-
-          <p>New Orders</p>
+          <h3>{{ $students_count }}</h3>
+          <p>Siswa</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
@@ -34,9 +33,8 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-          <p>Bounce Rate</p>
+          <h3>{{ $tentors_count }}</h3>
+          <p>Tentor</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
@@ -49,9 +47,8 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>44</h3>
-
-          <p>User Registrations</p>
+          <h3>{{ $subjects_count }}</h3>
+          <p>Mata Pelajaran</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -64,9 +61,8 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>65</h3>
-
-          <p>Unique Visitors</p>
+          <h3>{{ $levels_count }}</h3>
+          <p>Jenjang</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>

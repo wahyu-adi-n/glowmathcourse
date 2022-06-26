@@ -28,7 +28,7 @@ class DashboardController extends Controller
      */
     public function siswaDashboard()
     {
-        return view('siswa.dashboard', [
+        return view('student.dashboard', [
             'title' => 'Dashboard Siswa',
             'subtitle' => 'Dashboard'
         ]);
@@ -44,10 +44,10 @@ class DashboardController extends Controller
         return view('admin.dashboard', [
             'title' => 'Dashboard Admin',
             'subtitle' => 'Dashboard',
-            // 'students_count' => Student::all()->count(),
-            // 'tentors_count' => Tentor::all()->count(),
-            // 'subjects_count' => Subject::all()->count(),
-            // 'levels_count' => Level::all()->count()
+            'students_count' => Student::all()->count(),
+            'tentors_count' => Tentor::all()->count(),
+            'subjects_count' => Subject::all()->count(),
+            'levels_count' => Level::all()->count()
         ]);
     }
 
