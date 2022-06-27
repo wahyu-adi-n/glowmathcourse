@@ -44,7 +44,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::controller(TentorController::class)->group(function () {
         Route::get('/admin/tentor', 'index')->name('tentor.index');
-        Route::get('/admin/tentor/{tentorId:id}', 'show')->name('tentor.show');
+        Route::get('/admin/tentor/{tentorId:kode_tentor}', 'show')->name('tentor.show');
     });
 
     Route::controller(StudentController::class)->group(function () {
