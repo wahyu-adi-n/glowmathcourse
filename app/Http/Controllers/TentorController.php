@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Tentor;
 use Illuminate\Support\Facades\DB;
 
 class TentorController extends Controller

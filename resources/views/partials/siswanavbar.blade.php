@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white fixed-top">
   <div class="container">
-    <a href="{{ route('siswa.dashboard') }}" class="navbar-brand">
+    <a href="{{ route('student.dashboard') }}" class="navbar-brand">
       <img src="/dist/img/tosca.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-1">
       <span class="brand-text font-weight-light">Glowmath<b>course</b></span>
     </a>
@@ -15,13 +15,13 @@
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="{{ route('siswa.dashboard') }}" class="nav-link">Beranda</a>
+          <a href="{{ route('student.dashboard') }}" class="nav-link">Beranda</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('siswa.tentor') }}" class="nav-link">Tentor</a>
+          <a href="{{ route('student.tentor') }}" class="nav-link">Tentor</a>
         </li>
         <li class="nav-item dropdown">
-          <a id="dropdownSubMenu1" href="{{ route('siswa.subject') }}" data-toggle="dropdown" aria-haspopup="true"
+          <a id="dropdownSubMenu1" href="{{ route('student.subject') }}" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" class="nav-link dropdown-toggle">Mata Pelajaran</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
             <li><a href="#" class="dropdown-item">Some action </a></li>
@@ -79,21 +79,20 @@
           Hai, {{ auth()->user()->name }}
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="{{ route('siswa.dashboard') }}" class="dropdown-item">
+          <a href="{{ route('student.dashboard') }}" class="dropdown-item">
             <i class="fas fa-grip-horizontal mr-2"></i> Dashboard
           </a>
           <div class="dropdown-divider"></div>
-          <a href="{{ route('siswa.profile') }}" class="dropdown-item">
+          <a href="{{ route('student.profile') }}" class="dropdown-item">
             <i class="far fa-user mr-2"></i> Profil
           </a>
           <div class="dropdown-divider"></div>
-          <a href="{{ route('siswa.settings') }}" class="dropdown-item">
+          <a href="{{ route('student.settings') }}" class="dropdown-item">
             <i class="fas fa-cog mr-2"></i> Pengaturan
           </a>
           <div class="dropdown-divider"></div>
-          <form action="{{ route('siswa.logout') }}" method="POST">
+          <form action="{{ route('student.logout') }}" method="POST">
             @csrf
-            @method('post')
             <button type="submit" class="dropdown-item dropdown-footer">
               <i class="fas fa-sign-out-alt mr-2"></i>Keluar
             </button>

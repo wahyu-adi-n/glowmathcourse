@@ -6,7 +6,9 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\TentorController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\TentorDashboardController;
+use App\Http\Controllers\StudentDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +33,21 @@ Route::post('/login', [AuthController::class, 'loginProcess']);
 Route::post('/register', [AuthController::class, 'registerProcess']);
 
 Route::middleware(['auth', 'user-access:siswa'])->group(function () {
-    Route::get('/siswa/dashboard', [DashboardController::class, 'siswaDashboard'])->name('siswa.dashboard');
-    Route::get('/siswa/tentor', [DashboardController::class, 'siswaDashboard'])->name('siswa.tentor');
-    Route::get('/siswa/mapel', [DashboardController::class, 'siswaDashboard'])->name('siswa.subject');
-    Route::get('/siswa/profil', [DashboardController::class, 'siswaDashboard'])->name('siswa.profile');
-    Route::get('/siswa/pengaturan', [DashboardController::class, 'siswaDashboard'])->name('siswa.settings');
+    Route::get('/siswa/dashboard', [StudentDashboardController::class, 'studentDashboard'])->name('student.dashboard');
+    Route::get('/siswa/tentor', [StudentDashboardController::class, 'studentDashboard'])->name('student.tentor');
+    Route::get('/siswa/mapel', [StudentDashboardController::class, 'studentDashboard'])->name('student.subject');
+    Route::get('/siswa/profil', [StudentDashboardController::class, 'studentDashboard'])->name('student.profile');
+    Route::get('/siswa/pengaturan', [StudentDashboardController::class, 'studentDashboard'])->name('student.settings');
 });
-Route::post('/siswa/logout', [AuthController::class, 'logout'])->name('siswa.logout');
+Route::post('/siswa/logout', [AuthController::class, 'logout'])->name('student.logout');
 
 Route::middleware(['auth', 'user-access:tentor'])->group(function () {
-    Route::get('/tentor/dashboard', [DashboardController::class, 'tentorDashboard'])->name('tentor.dashboard');
+    Route::get('/tentor/dashboard', [TentorDashboardController::class, 'tentorDashboard'])->name('tentor.dashboard');
 });
 Route::post('/tentor/logout', [AuthController::class, 'logout'])->name('tentor.logout');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::controller(TentorController::class)->group(function () {
         Route::get('/admin/tentor', 'index')->name('tentor.index');
         // Route::get('/admin/tentor/create', 'create')->name('tentor.create');

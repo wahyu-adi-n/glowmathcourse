@@ -6,10 +6,9 @@ use App\Models\Level;
 use App\Models\Tentor;
 use App\Models\Student;
 use App\Models\Subject;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class AdminDashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,19 +25,6 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function siswaDashboard()
-    {
-        return view('student.dashboard', [
-            'title' => 'Dashboard Siswa',
-            'subtitle' => 'Dashboard'
-        ]);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function adminDashboard()
     {
         return view('admin.dashboard', [
@@ -48,19 +34,6 @@ class DashboardController extends Controller
             'tentors_count' => Tentor::all()->count(),
             'subjects_count' => Subject::all()->count(),
             'levels_count' => Level::all()->count()
-        ]);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function tentorDashboard()
-    {
-        return view('tentor.dashboard', [
-            'title' => 'Dashboard Tentor',
-            'subtitle' => 'Dashboard'
         ]);
     }
 }
