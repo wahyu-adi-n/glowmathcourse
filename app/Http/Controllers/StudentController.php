@@ -25,7 +25,7 @@ class StudentController extends Controller
 
         return view('admin.siswa.show', [
             'title' => 'Detail Siswa',
-            'students' => $siswa,
+            'student' => $siswa,
         ]);
     }
 }
