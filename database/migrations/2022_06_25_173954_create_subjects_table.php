@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_mapel')->unique();
+            $table->string('nama_mapel');
+            $table->string('waktu');
+            $table->string('ruangan');
             $table->timestamps();
         });
     }

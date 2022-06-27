@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\TentorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -44,17 +46,22 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::controller(TentorController::class)->group(function () {
         Route::get('/admin/tentor', 'index')->name('tentor.index');
+        // Route::get('/admin/tentor/create', 'create')->name('tentor.create');
+        // Route::post('/admin/tentor/', 'store')->name('tentor.store');
+        // Route::put('/admin/tentor/{tentorId:id}', 'update')->name('tentor.update');
         Route::get('/admin/tentor/{tentorId:kode_tentor}', 'show')->name('tentor.show');
+        // Route::get('/admin/tentor/{tentorId:id}/edit', 'edit')->name('tentor.edit');
+        // Route::delete('/admin/tentor/{tentorId:id}', 'destroy')->name('tentor.destroy');
     });
 
     Route::controller(StudentController::class)->group(function () {
         Route::get('/admin/siswa', 'index')->name('student.index');
-        Route::get('/admin/siswa/create', 'create')->name('student.create');
-        Route::post('/admin/siswa/', 'store')->name('student.store');
-        Route::put('/admin/siswa/{siswaId:id}', 'update')->name('student.update');
+        // Route::get('/admin/siswa/create', 'create')->name('student.create');
+        // Route::post('/admin/siswa/', 'store')->name('student.store');
+        // Route::put('/admin/siswa/{siswaId:id}', 'update')->name('student.update');
         Route::get('/admin/siswa/{siswaId:id}', 'show')->name('student.show');
-        Route::get('/admin/siswa/{siswaId:id}/edit', 'edit')->name('student.edit');
-        Route::delete('/admin/siswa/{siswaId:id}', 'destroy')->name('student.destroy');
+        // Route::get('/admin/siswa/{siswaId:id}/edit', 'edit')->name('student.edit');
+        // Route::delete('/admin/siswa/{siswaId:id}', 'destroy')->name('student.destroy');
     });
 
     Route::controller(SubjectController::class)->group(function () {

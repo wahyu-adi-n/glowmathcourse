@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_jenjang')->unique();
+            $table->string('jenjang');
             $table->timestamps();
         });
     }
