@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -37,7 +39,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+      <img class="animation__shake" src="/dist/img/glow.png" alt="Glowmathcourse" height="60" width="60">
     </div>
     @include('partials.navbar')
     @include('partials.sidebar')
@@ -706,7 +708,48 @@
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
   </script>
+  <script src="/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script>
+    const fail = $('.fail').data('flashdata');
+    const success = $('.success').data('flashdata');
 
+    if (fail) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: fail
+      });
+    }
+
+    if (success) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: success
+      });
+    }
+  </script>
 </body>
 
 </html>

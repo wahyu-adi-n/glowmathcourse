@@ -17,7 +17,7 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $userLevel)
     {
-        if(Auth::user()->level == $userLevel){
+        if(auth()->user()->level == $userLevel){
             return $next($request);
         }
 

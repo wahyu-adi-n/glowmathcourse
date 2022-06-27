@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Database\Console\Migrations\RefreshCommand;
 
 class AuthController extends Controller
 {
@@ -122,6 +123,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->to('login')->with('success', 'Kamu berhasil keluar!');
     }
 }

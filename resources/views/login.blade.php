@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ $title }}</title>
+  <title>Glowmathcourse Login</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -28,7 +28,7 @@
         <div class="success" data-flashdata="{{ session('success') }}"></div>
       @endif
       <div class="card-header text-center">
-        <a href="/login" class="h3"><b>{{ $title }}</b></a>
+        <a href="/login" class="h3"><b>Login</b></a>
       </div>
       <div class="card-body">
         <form action="/login" method="post">
@@ -41,11 +41,6 @@
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
-            {{-- @error('email')
-              <div class="error invalid-feedback">
-                {{ $message }}
-              </div>
-            @enderror --}}
           </div>
           <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('email') is-invalid @enderror"
@@ -55,11 +50,6 @@
                 <span class="fas fa-lock"></span>
               </div>
             </div>
-            {{-- @error('password')
-              <div class="error invalid-feedback">
-                {{ $message }}
-              </div>
-            @enderror --}}
           </div>
           <div class="row">
             <div class="col-lg-12">
