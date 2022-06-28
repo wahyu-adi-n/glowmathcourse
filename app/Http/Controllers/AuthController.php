@@ -70,7 +70,7 @@ class AuthController extends Controller
             }else if ($request->user()->level == UserLevel::tentor->name) {
                 return redirect()->route('tentor.dashboard')->with('success', 'Login kamu berhasil!');
             }else if ($request->user()->level == UserLevel::siswa->name){
-                return redirect()->route('siswa.dashboard')->with('success', 'Login kamu berhasil!');
+                return redirect()->route('student.dashboard')->with('success', 'Login kamu berhasil!');
             } else {
                 return back()->with('fail','Email dan password kamu salah!');
             }
@@ -122,6 +122,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->to('login')->with('success', 'Kamu berhasil keluar!');
+        return redirect()->to('/')->with('success', 'Kamu berhasil keluar!');
     }
 }

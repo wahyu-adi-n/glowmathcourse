@@ -21,8 +21,9 @@ use App\Http\Controllers\StudentDashboardController;
 |
 */
 Route::get('/', function () {
-    return view('login');
+    return redirect()->route('mainpage');
 });
+Route::get('/siswa', [StudentDashboardController::class, 'index'])->middleware('guest')->name('mainpage');
 
 Route::controller(AuthController::class)->middleware('guest')->group(function () {
     Route::get('/login', 'login')->name('login');
@@ -31,6 +32,7 @@ Route::controller(AuthController::class)->middleware('guest')->group(function ()
 
 Route::post('/login', [AuthController::class, 'loginProcess']);
 Route::post('/register', [AuthController::class, 'registerProcess']);
+
 
 Route::middleware(['auth', 'user-access:siswa'])->group(function () {
     Route::get('/siswa/dashboard', [StudentDashboardController::class, 'studentDashboard'])->name('student.dashboard');

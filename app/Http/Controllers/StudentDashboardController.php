@@ -6,16 +6,9 @@ use App\Http\Controllers\Controller;
 
 class StudentDashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function index() {
+        return view('student.dashboard', ['title'=> 'Glowmathcourse']);
     }
-
     /**
      * Show the application dashboard.
      *
